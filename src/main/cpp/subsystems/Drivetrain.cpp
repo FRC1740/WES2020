@@ -18,7 +18,8 @@ double Drivetrain::DeadZoneCorrection(double axis_value) {
 }
 
 void Drivetrain::ArcadeDrive(double speed, double rot) {
-    drive.ArcadeDrive(speed, DeadZoneCorrection(rot));
+    //turned rotational speed down
+    drive.ArcadeDrive(speed, (DeadZoneCorrection(rot) / 1.3));
 }
 
 void Drivetrain::SetMaxOutput(double maxOutput) {
