@@ -10,7 +10,10 @@
 #include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
 
+// Dependent subsystems
 #include "subsystems/Shooter.h"
+#include "subsystems/Drivetrain.h"
+// We need the drivetrain in order to auto-target
 
 /**
  * An example command.
@@ -22,7 +25,7 @@
 class Shoot
   : public frc2::CommandHelper<frc2::CommandBase, Shoot> {
   public:
-    explicit Shoot(Shooter* subsystem);
+    explicit Shoot(Shooter* m_shooter);
 
     void Execute() override;
 

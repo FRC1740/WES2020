@@ -59,6 +59,7 @@ void RobotContainer::ConfigureButtonBindings() {
   // frc2::JoystickButton(&driverController, ConXBOXController::X)
   //     .WhileHeld(new Shoot(&shoot));
 
+  // frc2::Button([this] {return driver_controller.GetRawButton(ConXBOXController::Y); }).WhenPressed(new Target(&target));
   frc2::Button([this] {return true;}).WhileHeld(new LogDataToDashboard(&shoot));
 }
 

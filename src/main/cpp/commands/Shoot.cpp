@@ -9,13 +9,15 @@
 
 #include "commands/Shoot.h"
 
-Shoot::Shoot(Shooter* subsystem) : shoot{subsystem} {
+Shoot::Shoot(Shooter* m_shooter) : shoot{m_shooter} {
   // Use addRequirements() here to declare subsystem dependencies.
-  AddRequirements({subsystem});
+  AddRequirements({m_shooter});
 }
 
 // Called when the command is initially scheduled.
 void Shoot::Execute() {
+
+  // Use 
   shoot->SetBottomMotorSpeed(frc::SmartDashboard::GetNumber("Bottom Motor RPM", 0.0));
   shoot->SetTopMotorSpeed(frc::SmartDashboard::GetNumber("Top Motor RPM", 0.0));
 }
