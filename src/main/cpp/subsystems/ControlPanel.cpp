@@ -6,6 +6,7 @@
 /*----------------------------------------------------------------------------*/
 
 #include "subsystems/ControlPanel.h"
+#include <frc/smartdashboard/SmartDashboard.h>
 
 ControlPanel::ControlPanel() {
 
