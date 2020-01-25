@@ -9,6 +9,7 @@
 
 #include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
+#include "subsystems/ControlPanel.h"
 
 /**
  * An example command.
@@ -20,7 +21,7 @@
 class ControlPanelRotate
     : public frc2::CommandHelper<frc2::CommandBase, ControlPanelRotate> {
  public:
-  ControlPanelRotate();
+  ControlPanelRotate(ControlPanel *controlpanel);
 
   void Initialize() override;
 
@@ -29,4 +30,9 @@ class ControlPanelRotate
   void End(bool interrupted) override;
 
   bool IsFinished() override;
+
+  private:
+    ControlPanel *m_controlpanel;
+    unsigned int m_transitions;
+    std::string m_currentColor;
 };
