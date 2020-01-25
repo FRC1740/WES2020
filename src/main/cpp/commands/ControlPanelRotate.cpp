@@ -6,19 +6,42 @@
 /*----------------------------------------------------------------------------*/
 
 #include "commands/ControlPanelRotate.h"
+#include "frc/smartdashboard/SmartDashboard.h"
+//#include <networktables/NetworkTable.h>
+//#include <networktables/NetworkTableInstance.h>
 
-ControlPanelRotate::ControlPanelRotate() {
+ControlPanelRotate::ControlPanelRotate(ControlPanel *controlpanel) : m_controlpanel(controlpanel) {
   // Use addRequirements() here to declare subsystem dependencies.
+  AddRequirements({controlpanel});
 }
 
 // Called when the command is initially scheduled.
-void ControlPanelRotate::Initialize() {}
+void ControlPanelRotate::Initialize() {
+  m_transitions = 0;
+  // Read the current color from the smart dashboard
+  m_currentColor = frc::SmartDashboard::GetString("Detected Color", "Purple");
+}
 
 // Called repeatedly when this Command is scheduled to run
-void ControlPanelRotate::Execute() {}
+void ControlPanelRotate::Execute() {
+  m_controlpanel->Rotate();
+  std::string newColor = frc::SmartDashboard::GetString("Detected Color", "Purple"); 
+  if (newColor != m_currentColor) {
+    m_currentColor = newColor;
+    m_transitions++; 
+    frc::SmartDashboard::PutNumber("Rotation Count: ", m_transitions);
+  }
+}
 
 // Called once the command ends or is interrupted.
 void ControlPanelRotate::End(bool interrupted) {}
 
 // Returns true when the command should end.
-bool ControlPanelRotate::IsFinished() { return false; }
+bool ControlPanelRotate::IsFinished() {
+  if (m_transitions > 36) {
+    m_controlpanel->Stop();
+    m_transitions=0;
+    return true;
+  }
+  return false;
+}

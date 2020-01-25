@@ -64,6 +64,7 @@ void RobotContainer::ConfigureButtonBindings() {
   frc2::Button([this] {return true;}).WhileHeld(new LogDataToDashboard(&shoot));
 
   frc2::Button([this] {return driver_controller.GetRawButton(ConXBOXController::SELECT); }).WhenPressed(new ControlPanelColor(&controlpanel));
+  frc2::Button([this] {return driver_controller.GetRawButton(ConXBOXController::START); }).WhenPressed(new ControlPanelRotate(&controlpanel));
 
 }
 
