@@ -5,7 +5,6 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-
 #pragma once
 
 #include <frc2/command/SubsystemBase.h>
@@ -71,7 +70,5 @@ rev::ColorSensorV3 m_colorSensor{i2cPort};
  private:
   // Components (e.g. motor controllers and sensors) should generally be
   // declared private and exposed only through public methods.
-
   rev::CANSparkMax rotationMotor{ConControlPanel::MOTOR, rev::CANSparkMax::MotorType::kBrushless};
-
 };
