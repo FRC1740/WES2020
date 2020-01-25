@@ -16,6 +16,8 @@
 #include "commands/HalfSpeedDrive.h"
 #include "commands/RetractClimber.h"
 #include "commands/Shoot.h"
+#include "commands/ControlPanelColor.h"
+#include "commands/ControlPanelRotate.h"
 
 #include "RobotContainer.h"
 
@@ -33,7 +35,6 @@ RobotContainer::RobotContainer() {
        &drive,
        [this] { return driver_controller.GetRawAxis(ConXBOXController::RIGHT_TRIGGER_ID) - driver_controller.GetRawAxis(ConXBOXController::LEFT_TRIGGER_ID); },
        [this] { return driver_controller.GetRawAxis(ConXBOXController::RIGHT_JOYSTICK_X); }));
-
 
 }
 
@@ -61,6 +62,9 @@ void RobotContainer::ConfigureButtonBindings() {
 
   // frc2::Button([this] {return driver_controller.GetRawButton(ConXBOXController::Y); }).WhenPressed(new Target(&target));
   frc2::Button([this] {return true;}).WhileHeld(new LogDataToDashboard(&shoot));
+
+  frc2::Button([this] {return driver_controller.GetRawButton(ConXBOXController::SELECT); }).WhenPressed(new ControlPanelColor(&controlpanel));
+
 }
 
 frc2::Command* RobotContainer::GetAutonomousCommand() {

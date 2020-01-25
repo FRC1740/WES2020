@@ -13,6 +13,8 @@
 #include <frc/util/Color.h>
 #include <rev/ColorSensorV3.h>
 #include <rev/ColorMatch.h>
+#include <rev/CANSparkMax.h>
+#include "Constants.h"
 
 class ControlPanel : public frc2::SubsystemBase {
  public:
@@ -22,6 +24,8 @@ class ControlPanel : public frc2::SubsystemBase {
    * Will be called periodically whenever the CommandScheduler runs.
    */
   void Periodic();
+  void Rotate();
+  void Stop();
 
 /**
  * Change the I2C port below to match the connection of your color sensor
@@ -50,6 +54,7 @@ rev::ColorSensorV3 m_colorSensor{i2cPort};
    * are here as a basic example.
    */
   
+
   /* Starting REV calibration values */
   /*
   static constexpr frc::Color kBlueTarget = frc::Color(0.143, 0.427, 0.429);
@@ -66,4 +71,7 @@ rev::ColorSensorV3 m_colorSensor{i2cPort};
  private:
   // Components (e.g. motor controllers and sensors) should generally be
   // declared private and exposed only through public methods.
+
+  rev::CANSparkMax rotationMotor{ConControlPanel::MOTOR, rev::CANSparkMax::MotorType::kBrushless};
+
 };

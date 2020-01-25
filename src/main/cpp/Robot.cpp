@@ -30,6 +30,9 @@ void Robot::RobotInit() {
 void Robot::RobotPeriodic() { 
   frc2::CommandScheduler::GetInstance().Run();
   frc::SmartDashboard::PutNumber("Vision Target: ", VisionX.GetDouble(0.0));
+  frc::SmartDashboard::PutString("Desired Color: ", nt::NetworkTableInstance::GetDefault()\
+                        .GetTable("FMSInfo")\
+                        ->GetString("GameSpecificMessage", "NONE"));
   }
 
 /**

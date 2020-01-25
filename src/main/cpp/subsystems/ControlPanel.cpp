@@ -5,6 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
+#include "Constants.h"
 #include "subsystems/ControlPanel.h"
 #include <frc/smartdashboard/SmartDashboard.h>
 
@@ -67,4 +68,12 @@ void ControlPanel::Periodic() {
     frc::SmartDashboard::PutNumber("Matched B", matchedColor.blue);
     /* */
 
+}
+
+void ControlPanel::Rotate() {
+  rotationMotor.Set(ConControlPanel::MOTOR_SPEED);
+}
+
+void ControlPanel::Stop() {
+  rotationMotor.Set(0.0);
 }
