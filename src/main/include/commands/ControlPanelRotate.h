@@ -10,11 +10,6 @@
 #include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
 
-// Dependent subsystems
-#include "subsystems/Shooter.h"
-#include "subsystems/Drivetrain.h"
-// We need the drivetrain in order to auto-target
-
 /**
  * An example command.
  *
@@ -22,15 +17,16 @@
  * directly; this is crucially important, or else the decorator functions in
  * Command will *not* work!
  */
-class Shoot
-  : public frc2::CommandHelper<frc2::CommandBase, Shoot> {
-  public:
-    explicit Shoot(Shooter* m_shooter);
+class ControlPanelRotate
+    : public frc2::CommandHelper<frc2::CommandBase, ControlPanelRotate> {
+ public:
+  ControlPanelRotate();
 
-    void Execute() override;
+  void Initialize() override;
 
-    void End(bool interuptted) override;
+  void Execute() override;
 
-  private:
-    Shooter* shoot;
+  void End(bool interrupted) override;
+
+  bool IsFinished() override;
 };

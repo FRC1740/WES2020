@@ -5,26 +5,20 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include <frc/smartdashboard/SmartDashboard.h>
+#include "commands/ControlPanelRotate.h"
 
-#include "commands/Shoot.h"
-
-Shoot::Shoot(Shooter* m_shooter) : shoot{m_shooter} {
+ControlPanelRotate::ControlPanelRotate() {
   // Use addRequirements() here to declare subsystem dependencies.
-  AddRequirements({m_shooter});
 }
 
 // Called when the command is initially scheduled.
-void Shoot::Execute() {
+void ControlPanelRotate::Initialize() {}
 
-  // Use 
-  shoot->SetBottomMotorSpeed(frc::SmartDashboard::GetNumber("Bottom Motor RPM", 0.0));
-  shoot->SetTopMotorSpeed(frc::SmartDashboard::GetNumber("Top Motor RPM", 0.0));
-}
+// Called repeatedly when this Command is scheduled to run
+void ControlPanelRotate::Execute() {}
+
+// Called once the command ends or is interrupted.
+void ControlPanelRotate::End(bool interrupted) {}
 
 // Returns true when the command should end.
-// bool Shoot::IsFinished() { return true; }
-void Shoot::End(bool interupted) {
-  shoot->SetBottomMotorSpeed(0.0);
-  shoot->SetTopMotorSpeed(0.0);
-}
+bool ControlPanelRotate::IsFinished() { return false; }
