@@ -10,8 +10,8 @@
 #include "frc/smartdashboard/SmartDashboard.h"
 #include "networktables/NetworkTable.h"
 #include "networktables/NetworkTableInstance.h"
-// #include <stdio.h>
-// #include <string.h>
+#include <string>
+#include <cctype> // for tolower
 
 ControlPanelColor::ControlPanelColor(ControlPanel *controlpanel) : m_controlpanel(controlpanel) {
   // Use AddRequirements() here to declare subsystem dependencies.
@@ -29,23 +29,31 @@ void ControlPanelColor::Initialize() {
 void ControlPanelColor::Execute() {
   // Rotate the ControlPanel
   m_controlpanel->Rotate();
-
 }
 
 // Called once the command ends or is interrupted.
 void ControlPanelColor::End(bool interrupted) {}
 
+bool iequals(const std::string& a, const std::string& b) {
+  size_t sz = a.size();
+  if (sz != b.size())
+      return false;
+  for (size_t i=0; i<sz; ++i)
+      if (std::tolower(a[i]) != std::tolower(b[i]))
+          return false;
+  return true;
+}
+
 // Returns true when the command should end.
-bool ControlPanelColor::IsFinished() { 
+bool ControlPanelColor::IsFinished() {
+
   // if ColorScan = targetcolor return true;
   // Scan for current color
   std::string detectedColor = frc::SmartDashboard::GetString("Detected Color", "Orange");
-  if (detectedColor == m_targetColor) {
+  if (iequals(detectedColor, m_targetColor)) {
       m_controlpanel->Stop();
       return true;    
   }
-  // FIXME: Can't assume case matching, so need case insensitive compare
-  //if (std::toupper(detectedColor) == std::toupper(m_targetColor)) {
-  // if (stricmp(detectedColor.c_str(), m_targetColor.c_str())) {
+
   return false;
 }
