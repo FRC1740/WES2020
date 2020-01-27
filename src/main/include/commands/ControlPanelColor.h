@@ -9,12 +9,7 @@
 
 #include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
-
-// Dependent subsystems
-#include "subsystems/Shooter.h"
-#include "subsystems/Drivetrain.h"
-// We need the drivetrain in order to auto-target
-
+#include "subsystems/ControlPanel.h"
 /**
  * An example command.
  *
@@ -22,15 +17,22 @@
  * directly; this is crucially important, or else the decorator functions in
  * Command will *not* work!
  */
-class Shoot
-  : public frc2::CommandHelper<frc2::CommandBase, Shoot> {
-  public:
-    explicit Shoot(Shooter* m_shooter);
+class ControlPanelColor
+    : public frc2::CommandHelper<frc2::CommandBase, ControlPanelColor> {
+ public:
+  ControlPanelColor(ControlPanel *controlpanel);
 
-    void Execute() override;
+  void Initialize() override;
 
-    void End(bool interuptted) override;
+  void Execute() override;
+
+  void End(bool interrupted) override;
+
+  bool IsFinished() override;
 
   private:
-    Shooter* shoot;
+    /* Target Color specified by the FMS during match */
+    std::string m_targetColor;
+    ControlPanel *m_controlpanel;
+
 };

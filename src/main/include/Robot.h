@@ -11,6 +11,9 @@
 #include <frc2/command/Command.h>
 
 #include "RobotContainer.h"
+#include <networktables/NetworkTable.h>
+#include <networktables/NetworkTableEntry.h>
+#include <networktables/NetworkTableInstance.h>
 
 class Robot : public frc::TimedRobot {
  public:
@@ -23,6 +26,8 @@ class Robot : public frc::TimedRobot {
   void TeleopInit() override;
   void TeleopPeriodic() override;
   void TestPeriodic() override;
+
+  nt::NetworkTableEntry VisionX;
 
  private:
   // Have it null by default so that if testing teleop it
