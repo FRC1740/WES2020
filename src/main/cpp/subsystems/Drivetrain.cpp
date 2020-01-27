@@ -27,10 +27,19 @@ void Drivetrain::SetMaxOutput(double maxOutput) {
 
 //This is autonomous code that needs to get updated to real things afterwards
 void Drivetrain::ResetEncoders() {
-  left_encoder.SetPosition(0);
-  right_encoder.SetPosition(0);
+  left_encoder.SetPosition(0.0);
+  right_encoder.SetPosition(0.0);
 }
 
+
+// Right Encoder set to negative b/c motor flipped
+double Drivetrain::GetRightEncoder() {
+  return (-right_encoder.GetPosition() * ConAuto::EncoderTicksToInches) + ConAuto::EncoderTicksToInchesConst;
+}
+
+double Drivetrain::GetLeftEncoder() {
+  return (left_encoder.GetPosition() * ConAuto::EncoderTicksToInches) + ConAuto::EncoderTicksToInchesConst;
+}
 double Drivetrain::GetAverageEncoderDistance() {
-  return (left_encoder.GetPosition() + right_encoder.GetPosition()) / 2.0;
+  return (Drivetrain::GetRightEncoder() + Drivetrain::GetLeftEncoder()) / 2.0;
 }

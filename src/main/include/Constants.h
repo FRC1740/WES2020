@@ -19,9 +19,20 @@
 
 //THESE ARE ALL DUMBY VALUES FOR A SIMPLE AUTO
 namespace ConAuto {
-    constexpr double AutoDriveDistanceInches = 60;
-    constexpr double AutoBackupDistanceInches = 20;
-    constexpr double AutoDriveSpeed = 0.5; 
+
+    //Drive a distance
+    constexpr double AutoDriveDistanceInches = 120.0;
+    constexpr double AutoBackupDistanceInches = 20.0;
+    constexpr double AutoDriveSpeed = 0.5;
+
+    //Drive in a square 
+    constexpr double AutoDriveSquareSpeed = 0.25;
+    constexpr double AutoDriveSquareRotSpeed = 0.25;
+    constexpr double AutoDriveSquareSideInches = 6;
+
+    //Conversion factor Ticks -> Inches
+    constexpr double EncoderTicksToInches = 2.0 + (2/9); //0.58
+    constexpr double EncoderTicksToInchesConst = -6.0 - (2/3);
 }
 
 namespace ConClimber {
