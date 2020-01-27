@@ -5,28 +5,28 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "commands/DriveDistance.h"
+#include "commands/Rotate.h"
 
-#include <cmath>
-
-DriveDistance::DriveDistance(double inches, double speed,
+Rotate::Rotate(double degrees, double speed,
                              Drivetrain* subsystem)
-    : drive(subsystem), distance(inches), speed(speed) {
+    : drive(subsystem), degrees(degrees), speed(speed) {
   AddRequirements({subsystem});
+  // Use addRequirements() here to declare subsystem dependencies.
 }
 
-void DriveDistance::Initialize() {
+// Called when the command is initially scheduled.
+void Rotate::Initialize() {
   drive->ResetEncoders();
+  drive->ArcadeDrive(0, speed);
 }
 
-void DriveDistance::Execute() {
-  drive->ArcadeDrive(speed, 0);
-  std::cout << "Right " << std::to_string(drive->GetRightEncoder()) << "\n";
-  std::cout << "Left " << std::to_string(drive->GetLeftEncoder()) << "\n";
+// Called repeatedly when this Command is scheduled to run
+void Rotate::Execute() {
+  drive->ArcadeDrive(0, speed);
 }
 
-void DriveDistance::End(bool interrupted) { drive->ArcadeDrive(0, 0); }
+// Called once the command ends or is interrupted.
+void Rotate::End(bool interrupted) {}
 
-bool DriveDistance::IsFinished() {
-  return (std::abs(drive->GetAverageEncoderDistance()) >= distance);
-}
+// Returns true when the command should end.
+bool Rotate::IsFinished() { return false; }

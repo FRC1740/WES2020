@@ -12,28 +12,28 @@
 
 #include "subsystems/Drivetrain.h"
 
-class DriveDistance
-    : public frc2::CommandHelper<frc2::CommandBase, DriveDistance> {
+/**
+ * An example command.
+ *
+ * <p>Note that this extends CommandHelper, rather extending CommandBase
+ * directly; this is crucially important, or else the decorator functions in
+ * Command will *not* work!
+ */
+class Rotate
+    : public frc2::CommandHelper<frc2::CommandBase, Rotate> {
  public:
-  /**
-   * Creates a new DriveDistance.
-   *
-   * @param inches The number of inches the robot will drive
-   * @param speed The speed at which the robot will drive
-   * @param drive The drive subsystem on which this command will run
-   */
-  DriveDistance(double inches, double speed, Drivetrain* subsystem);
+  Rotate(double degrees, double speed, Drivetrain* subsystem);
 
   void Initialize() override;
+
+  void Execute() override;
 
   void End(bool interrupted) override;
 
   bool IsFinished() override;
 
-  void Execute() override;
-
- private:
+private:
   Drivetrain* drive;
-  double distance;
+  double degrees;
   double speed;
 };
