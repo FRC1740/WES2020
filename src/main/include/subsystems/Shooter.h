@@ -12,6 +12,7 @@
 #include <rev/CANSparkMax.h>
 
 #include "Constants.h"
+#include <frc/Ultrasonic.h>
 
 class Shooter : public frc2::SubsystemBase {
  public:
@@ -30,9 +31,11 @@ class Shooter : public frc2::SubsystemBase {
 
   double GetTopMotorSpeed();
 
+
  private:
   // Components (e.g. motor controllers and sensors) should generally be
   // declared private and exposed only through public methods.
+  frc::Ultrasonic powerCellDetector{0,1};
 
   // Motors for spinning top and bottom wheels of the shooter
   rev::CANSparkMax top_motor{ConShooter::Top::MOTOR, rev::CANSparkMax::MotorType::kBrushless};

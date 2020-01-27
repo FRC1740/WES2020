@@ -29,6 +29,12 @@ namespace ConClimber {
     constexpr int CLIMB_MOTOR = 6;
 }
 
+namespace ConControlPanel {
+    // Motor
+    constexpr int MOTOR = 2;
+    constexpr double MOTOR_SPEED = 0.5;
+}
+
 namespace ConDrivetrain {
     //Motors
     constexpr int RIGHT_MOTOR = 4;
