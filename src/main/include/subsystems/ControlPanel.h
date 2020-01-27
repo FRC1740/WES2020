@@ -12,7 +12,8 @@
 #include <frc/util/Color.h>
 #include <rev/ColorSensorV3.h>
 #include <rev/ColorMatch.h>
-#include <rev/CANSparkMax.h>
+// #include <rev/CANSparkMax.h> // Using a talon
+#include <ctre/Phoenix.h>
 #include "Constants.h"
 
 class ControlPanel : public frc2::SubsystemBase {
@@ -70,5 +71,6 @@ rev::ColorSensorV3 m_colorSensor{i2cPort};
  private:
   // Components (e.g. motor controllers and sensors) should generally be
   // declared private and exposed only through public methods.
-  rev::CANSparkMax rotationMotor{ConControlPanel::MOTOR, rev::CANSparkMax::MotorType::kBrushless};
+  // rev::CANSparkMax rotationMotor{ConControlPanel::MOTOR, rev::CANSparkMax::MotorType::kBrushless};
+  WPI_TalonSRX rotationMotor{ConControlPanel::MOTOR};
 };
