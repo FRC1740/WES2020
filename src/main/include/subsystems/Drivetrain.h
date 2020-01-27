@@ -35,6 +35,10 @@ class Drivetrain : public frc2::SubsystemBase {
 
   double GetAverageEncoderDistance();
 
+  double GetRightEncoder();
+
+  double GetLeftEncoder();
+
   void ResetEncoders();
   
  private:
