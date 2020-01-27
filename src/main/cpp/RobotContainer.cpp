@@ -24,8 +24,8 @@
 RobotContainer::RobotContainer() {
   // Initialize all of your commands and subsystems here
   
-  frc::SmartDashboard::PutNumber("Top Motor RPM", 0.0);
-  frc::SmartDashboard::PutNumber("Bottom Motor RPM", 0.0);
+  frc::SmartDashboard::PutNumber("Top Motor RPM", 1700.0); // FIXME: Arbitrary starting RPM
+  frc::SmartDashboard::PutNumber("Bottom Motor RPM", 1700.0);
 
   // Configure the button bindings
   ConfigureButtonBindings();
