@@ -10,8 +10,8 @@
 Shooter::Shooter() {
     
     // Invert
-    top_motor.SetInverted(true);
-    bottom_motor.SetInverted(false);
+    top_motor.SetInverted(false);
+    bottom_motor.SetInverted(true);
     //Set velocity of shaft relative to velocity of wheel
     top_encoder.SetVelocityConversionFactor(ConShooter::Top::VELOCITY_FACTOR);
     bottom_encoder.SetVelocityConversionFactor(ConShooter::Bottom::VELOCITY_FACTOR);
