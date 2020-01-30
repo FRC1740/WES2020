@@ -11,6 +11,7 @@
 
 ControlPanel::ControlPanel() {
 
+    m_currentSpeed = ConControlPanel::MOTOR_SPEED; // Optimum for multi-rotation
     m_colorMatcher.AddColorMatch(kBlueTarget);
     m_colorMatcher.AddColorMatch(kGreenTarget);
     m_colorMatcher.AddColorMatch(kRedTarget);
@@ -71,9 +72,14 @@ void ControlPanel::Periodic() {
 }
 
 void ControlPanel::Rotate() {
-  rotationMotor.Set(ConControlPanel::MOTOR_SPEED);
+  rotationMotor.Set(m_currentSpeed);
+}
+
+void ControlPanel::SetSpeed(double speed) {
+  m_currentSpeed = speed;
 }
 
 void ControlPanel::Stop() {
   rotationMotor.Set(0.0);
+  m_currentSpeed = ConControlPanel::MOTOR_SPEED;
 }

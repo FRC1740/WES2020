@@ -26,6 +26,7 @@ class ControlPanel : public frc2::SubsystemBase {
   void Periodic();
   void Rotate();
   void Stop();
+  void SetSpeed(double);
 
 /**
  * Change the I2C port below to match the connection of your color sensor
@@ -73,4 +74,5 @@ rev::ColorSensorV3 m_colorSensor{i2cPort};
   // declared private and exposed only through public methods.
   // rev::CANSparkMax rotationMotor{ConControlPanel::MOTOR, rev::CANSparkMax::MotorType::kBrushless};
   WPI_TalonSRX rotationMotor{ConControlPanel::MOTOR};
+  double m_currentSpeed;
 };

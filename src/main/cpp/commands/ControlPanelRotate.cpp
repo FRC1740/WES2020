@@ -13,7 +13,8 @@
 ControlPanelRotate::ControlPanelRotate(ControlPanel *controlpanel) : m_controlpanel(controlpanel) {
   // Use addRequirements() here to declare subsystem dependencies.
   AddRequirements({controlpanel});
-}
+  frc::SmartDashboard::PutNumber("Rotation: ", 28);  // Best guess for number of color transitions sensed per 3 rotations
+ }
 
 // Called when the command is initially scheduled.
 void ControlPanelRotate::Initialize() {
@@ -38,7 +39,8 @@ void ControlPanelRotate::End(bool interrupted) {}
 
 // Returns true when the command should end.
 bool ControlPanelRotate::IsFinished() {
-  if (m_transitions > 36) {
+  int targetCount = frc::SmartDashboard::GetNumber("Rotation: ", 28);
+  if (m_transitions > targetCount) { // HACK: We are UNDERcounting. Catching abt 6 changes per rotation
     m_controlpanel->Stop();
     m_transitions=0;
     return true;
