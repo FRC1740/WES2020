@@ -23,6 +23,7 @@ void ControlPanelColor::Initialize() {
   // Read the target color from Network Tables
   auto table = nt::NetworkTableInstance::GetDefault().GetTable("FMSInfo");
   m_targetColor = table->GetString("GameSpecificMessage", "PURPLE");
+  m_controlpanel->SetSpeed(ConControlPanel::MOTOR_SPEED * .5);
 }
 
 // Called repeatedly when this Command is scheduled to run
