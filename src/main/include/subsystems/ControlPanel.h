@@ -12,8 +12,8 @@
 #include <frc/util/Color.h>
 #include <rev/ColorSensorV3.h>
 #include <rev/ColorMatch.h>
-// #include <rev/CANSparkMax.h> // Using a talon
-#include <ctre/Phoenix.h>
+// #include <rev/CANSparkMax.h> // If using a SparkMax
+#include <ctre/Phoenix.h>     // If using a TalonSRX
 #include "Constants.h"
 
 class ControlPanel : public frc2::SubsystemBase {
@@ -69,10 +69,23 @@ rev::ColorSensorV3 m_colorSensor{i2cPort};
   static constexpr frc::Color kRedTarget = frc::Color(0.523, 0.343, 0.130);
   static constexpr frc::Color kYellowTarget = frc::Color(0.320, 0.559, 0.120);
 
+  // FIXME: Assume Actual FMS Color is at 90 degrees from what we "see"
+  /* 
+  static constexpr frc::Color kWhenISeeBlue = kRedTarget;
+  static constexpr frc::Color kWhenISeeGreen = kYellowTarget;
+  static constexpr frc::Color kWhenISeeRed = kBlueTarget;
+  static constexpr frc::Color kWhenISeeYellow = kGreenTarget;  /* */
+  // FIXME: Straight up same color (NOT FOR COMPETITION - TESTING ONLY)
+  static constexpr frc::Color kWhenISeeBlue = frc::Color(0.125, 0.427, 0.449);
+  static constexpr frc::Color kWhenISeeGreen = kGreenTarget;
+  static constexpr frc::Color kWhenISeeRed = kRedTarget;
+  static constexpr frc::Color kWhenISeeYellow = kYellowTarget;
+
  private:
   // Components (e.g. motor controllers and sensors) should generally be
   // declared private and exposed only through public methods.
   // rev::CANSparkMax rotationMotor{ConControlPanel::MOTOR, rev::CANSparkMax::MotorType::kBrushless};
-  WPI_TalonSRX rotationMotor{ConControlPanel::MOTOR};
+  // WPI_TalonSRX rotationMotor{ConControlPanel::MOTOR}; // OLD Library
+  TalonSRX rotationMotor {ConControlPanel::MOTOR}; // 2020 Vendor Library
   double m_currentSpeed;
 };
