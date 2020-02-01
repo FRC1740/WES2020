@@ -21,6 +21,8 @@
 #include "subsystems/Drivetrain.h"
 #include "subsystems/Climber.h"
 #include "subsystems/Shooter.h"
+#include "subsystems/ControlPanel.h"
+
 
 /**
  * This class is where the bulk of the robot should be declared.  Since
@@ -42,11 +44,20 @@ class RobotContainer {
   Drivetrain drive;
   Climber climb;
   Shooter shoot;
+  ControlPanel controlpanel;
+
 
   // The autonomous routines
   DriveDistance simple_auto{ConAuto::AutoDriveDistanceInches,
-                             ConAuto::AutoDriveSpeed, &drive};
-  
+                            ConAuto::AutoDriveSpeed,
+                            &drive};
+
+  /*
+  AutoBasic DriveSquare{ConAuto::AutoDriveSquareSpeed,
+                        ConAuto::AutoDriveSquareRotSpeed,
+                        ConAuto::AutoDriveSquareSideInches};
+  */
+
   // frc::SendableChooser<frc2::Command*>
 
   // The driver's controller

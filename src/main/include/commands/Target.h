@@ -7,33 +7,17 @@
 
 #pragma once
 
-#include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
-
+#include <frc2/command/PIDCommand.h>
 #include "subsystems/Drivetrain.h"
+#include <networktables/NetworkTable.h>
+#include <networktables/NetworkTableEntry.h>
+#include <networktables/NetworkTableInstance.h>
 
-class DriveDistance
-    : public frc2::CommandHelper<frc2::CommandBase, DriveDistance> {
+class Target
+    : public frc2::CommandHelper<frc2::PIDCommand, Target> {
  public:
-  /**
-   * Creates a new DriveDistance.
-   *
-   * @param inches The number of inches the robot will drive
-   * @param speed The speed at which the robot will drive
-   * @param drive The drive subsystem on which this command will run
-   */
-  DriveDistance(double inches, double speed, Drivetrain* subsystem);
-
-  void Initialize() override;
-
-  void End(bool interrupted) override;
-
+  Target(units::degrees, Drivetrain*);
+  // nt::NetworkTableEntry VisionX;
   bool IsFinished() override;
-
-  void Execute() override;
-
- private:
-  Drivetrain* drive;
-  double distance;
-  double speed;
 };

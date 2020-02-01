@@ -19,14 +19,31 @@
 
 //THESE ARE ALL DUMBY VALUES FOR A SIMPLE AUTO
 namespace ConAuto {
-    constexpr double AutoDriveDistanceInches = 60;
-    constexpr double AutoBackupDistanceInches = 20;
-    constexpr double AutoDriveSpeed = 0.5; 
+
+    //Drive a distance
+    constexpr double AutoDriveDistanceInches = 120.0;
+    constexpr double AutoBackupDistanceInches = 20.0;
+    constexpr double AutoDriveSpeed = 0.5;
+
+    //Drive in a square 
+    constexpr double AutoDriveSquareSpeed = 0.25;
+    constexpr double AutoDriveSquareRotSpeed = 0.25;
+    constexpr double AutoDriveSquareSideInches = 6;
+
+    //Conversion factor Ticks -> Inches
+    constexpr double EncoderTicksToInches = 2.0 + (2/9); //0.58
+    constexpr double EncoderTicksToInchesConst = -6.0 - (2/3);
 }
 
 namespace ConClimber {
     //Motors
-    constexpr int CLIMB_MOTOR = 6;
+    constexpr int CLIMB_MOTOR = 9;
+}
+
+namespace ConControlPanel {
+    // Motor
+    constexpr int MOTOR = 3;
+    constexpr double MOTOR_SPEED = 0.324; // FIXME: Guess & Check
 }
 
 namespace ConDrivetrain {
@@ -49,7 +66,7 @@ namespace ConNEO {
 namespace ConShooter {
     constexpr int DEAULT_SPEED = 4000; //RPM
     namespace Top {
-        constexpr int MOTOR = 0;
+        constexpr int MOTOR = 6;
         constexpr int WHEEL_SIZE = 4; //in inches
         constexpr double VELOCITY_FACTOR = 1; //(ConMath::PI*WHEEL_SIZE) * ConMath::METERS_2_INCH * ConMath::MINUTES_2_SECONDS; //(velocity) y [m/s] = PI*WHEEL_SIZE * m/in * 1/60 * x [RPM]
         //PID gains
@@ -59,7 +76,7 @@ namespace ConShooter {
         constexpr double FF = 1.7e-4;
     }
     namespace Bottom {
-        constexpr int MOTOR = 1;
+        constexpr int MOTOR = 2;
         constexpr int WHEEL_SIZE = 6; //in inches
         constexpr double VELOCITY_FACTOR = 1; //(ConMath::PI*WHEEL_SIZE) * ConMath::METERS_2_INCH * ConMath::MINUTES_2_SECONDS; //(velocity) y [m/s] = PI*WHEEL_SIZE * m/in * 1/60 * x [RPM]
         //PID gains

@@ -16,14 +16,16 @@
 #include "commands/HalfSpeedDrive.h"
 #include "commands/RetractClimber.h"
 #include "commands/Shoot.h"
+#include "commands/ControlPanelColor.h"
+#include "commands/ControlPanelRotate.h"
 
 #include "RobotContainer.h"
 
 RobotContainer::RobotContainer() {
   // Initialize all of your commands and subsystems here
   
-  frc::SmartDashboard::PutNumber("Top Motor RPM", 0.0);
-  frc::SmartDashboard::PutNumber("Bottom Motor RPM", 0.0);
+  frc::SmartDashboard::PutNumber("Top Motor RPM", 1700.0); // FIXME: Arbitrary starting RPM
+  frc::SmartDashboard::PutNumber("Bottom Motor RPM", 1700.0);
 
   // Configure the button bindings
   ConfigureButtonBindings();
@@ -33,7 +35,6 @@ RobotContainer::RobotContainer() {
        &drive,
        [this] { return driver_controller.GetRawAxis(ConXBOXController::RIGHT_TRIGGER_ID) - driver_controller.GetRawAxis(ConXBOXController::LEFT_TRIGGER_ID); },
        [this] { return driver_controller.GetRawAxis(ConXBOXController::RIGHT_JOYSTICK_X); }));
-
 
 }
 
@@ -59,7 +60,12 @@ void RobotContainer::ConfigureButtonBindings() {
   // frc2::JoystickButton(&driverController, ConXBOXController::X)
   //     .WhileHeld(new Shoot(&shoot));
 
+  // frc2::Button([this] {return driver_controller.GetRawButton(ConXBOXController::Y); }).WhenPressed(new Target(&target));
   frc2::Button([this] {return true;}).WhileHeld(new LogDataToDashboard(&shoot));
+
+  frc2::Button([this] {return driver_controller.GetRawButton(ConXBOXController::SELECT); }).WhenPressed(new ControlPanelColor(&controlpanel));
+  frc2::Button([this] {return driver_controller.GetRawButton(ConXBOXController::START); }).WhenPressed(new ControlPanelRotate(&controlpanel));
+
 }
 
 frc2::Command* RobotContainer::GetAutonomousCommand() {

@@ -8,9 +8,16 @@
 #include "Robot.h"
 
 #include <frc/smartdashboard/SmartDashboard.h>
+#include <frc/shuffleboard/Shuffleboard.h>
 #include <frc2/command/CommandScheduler.h>
+#include <frc/Ultrasonic.h>
 
-void Robot::RobotInit() {}
+void Robot::RobotInit() {
+
+  auto inst = nt::NetworkTableInstance::GetDefault();
+  auto table = inst.GetTable("limelight");
+  VisionX = table->GetEntry("tx");
+}
 
 /**
  * This function is called every robot packet, no matter the mode. Use
@@ -20,7 +27,13 @@ void Robot::RobotInit() {}
  * <p> This runs after the mode specific periodic functions, but before
  * LiveWindow and SmartDashboard integrated updating.
  */
-void Robot::RobotPeriodic() { frc2::CommandScheduler::GetInstance().Run(); }
+void Robot::RobotPeriodic() { 
+  frc2::CommandScheduler::GetInstance().Run();
+  frc::SmartDashboard::PutNumber("Vision Target: ", VisionX.GetDouble(0.0));
+  frc::SmartDashboard::PutString("Desired Color: ", nt::NetworkTableInstance::GetDefault()\
+                        .GetTable("FMSInfo")\
+                        ->GetString("GameSpecificMessage", "NONE"));
+  }
 
 /**
  * This function is called once each time the robot enters Disabled mode. You

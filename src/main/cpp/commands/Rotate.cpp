@@ -5,26 +5,28 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include <frc/smartdashboard/SmartDashboard.h>
+#include "commands/Rotate.h"
 
-#include "commands/Shoot.h"
-
-Shoot::Shoot(Shooter* m_shooter) : shoot{m_shooter} {
+Rotate::Rotate(double degrees, double speed,
+                             Drivetrain* subsystem)
+    : drive(subsystem), degrees(degrees), speed(speed) {
+  AddRequirements({subsystem});
   // Use addRequirements() here to declare subsystem dependencies.
-  AddRequirements({m_shooter});
 }
 
 // Called when the command is initially scheduled.
-void Shoot::Execute() {
-
-  // Use 
-  shoot->SetBottomMotorSpeed(frc::SmartDashboard::GetNumber("Bottom Motor RPM", 0.0));
-  shoot->SetTopMotorSpeed(frc::SmartDashboard::GetNumber("Top Motor RPM", 0.0));
+void Rotate::Initialize() {
+  drive->ResetEncoders();
+  drive->ArcadeDrive(0, speed);
 }
+
+// Called repeatedly when this Command is scheduled to run
+void Rotate::Execute() {
+  drive->ArcadeDrive(0, speed);
+}
+
+// Called once the command ends or is interrupted.
+void Rotate::End(bool interrupted) {}
 
 // Returns true when the command should end.
-// bool Shoot::IsFinished() { return true; }
-void Shoot::End(bool interupted) {
-  shoot->SetBottomMotorSpeed(0.0);
-  shoot->SetTopMotorSpeed(0.0);
-}
+bool Rotate::IsFinished() { return false; }

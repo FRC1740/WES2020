@@ -17,11 +17,16 @@ DriveDistance::DriveDistance(double inches, double speed,
 
 void DriveDistance::Initialize() {
   drive->ResetEncoders();
+}
+
+void DriveDistance::Execute() {
   drive->ArcadeDrive(speed, 0);
+  std::cout << "Right " << std::to_string(drive->GetRightEncoder()) << "\n";
+  std::cout << "Left " << std::to_string(drive->GetLeftEncoder()) << "\n";
 }
 
 void DriveDistance::End(bool interrupted) { drive->ArcadeDrive(0, 0); }
 
 bool DriveDistance::IsFinished() {
-  return std::abs(drive->GetAverageEncoderDistance()) >= distance;
+  return (std::abs(drive->GetAverageEncoderDistance()) >= distance);
 }

@@ -9,31 +9,30 @@
 
 #include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
+#include "subsystems/ControlPanel.h"
 
-#include "subsystems/Drivetrain.h"
-
-class DriveDistance
-    : public frc2::CommandHelper<frc2::CommandBase, DriveDistance> {
+/**
+ * An example command.
+ *
+ * <p>Note that this extends CommandHelper, rather extending CommandBase
+ * directly; this is crucially important, or else the decorator functions in
+ * Command will *not* work!
+ */
+class ControlPanelRotate
+    : public frc2::CommandHelper<frc2::CommandBase, ControlPanelRotate> {
  public:
-  /**
-   * Creates a new DriveDistance.
-   *
-   * @param inches The number of inches the robot will drive
-   * @param speed The speed at which the robot will drive
-   * @param drive The drive subsystem on which this command will run
-   */
-  DriveDistance(double inches, double speed, Drivetrain* subsystem);
+  ControlPanelRotate(ControlPanel *controlpanel);
 
   void Initialize() override;
+
+  void Execute() override;
 
   void End(bool interrupted) override;
 
   bool IsFinished() override;
 
-  void Execute() override;
-
- private:
-  Drivetrain* drive;
-  double distance;
-  double speed;
+  private:
+    ControlPanel *m_controlpanel;
+    unsigned int m_transitions;
+    std::string m_currentColor;
 };
