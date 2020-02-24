@@ -18,7 +18,7 @@
 #include "commands/Shoot.h"
 #include "commands/ControlPanelColor.h"
 #include "commands/ControlPanelRotate.h"
-
+#include "commands/AlignToPlayerStationPID.h"
 #include "RobotContainer.h"
 
 RobotContainer::RobotContainer() {
@@ -66,6 +66,7 @@ void RobotContainer::ConfigureButtonBindings() {
   frc2::Button([this] {return driver_controller.GetRawButton(ConXBOXController::SELECT); }).WhenPressed(new ControlPanelColor(&controlpanel));
   frc2::Button([this] {return driver_controller.GetRawButton(ConXBOXController::START); }).WhenPressed(new ControlPanelRotate(&controlpanel));
 
+  frc2::Button([this] {return driver_controller.GetRawButton(ConXBOXController::Y); }).WhenPressed(new AlignToPlayerStationPID(&vision, &drive));
 }
 
 frc2::Command* RobotContainer::GetAutonomousCommand() {

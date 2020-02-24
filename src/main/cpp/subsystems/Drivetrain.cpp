@@ -8,7 +8,10 @@
 #include "Constants.h"
 #include "subsystems/Drivetrain.h"
 
-Drivetrain::Drivetrain() {}
+Drivetrain::Drivetrain() {
+  
+}
+
 
 // This method will be called once per scheduler run
 void Drivetrain::Periodic() {}
@@ -43,4 +46,8 @@ double Drivetrain::GetLeftEncoder() {
 }
 double Drivetrain::GetAverageEncoderDistance() {
   return (Drivetrain::GetRightEncoder() + Drivetrain::GetLeftEncoder()) / 2.0;
+}
+
+void Drivetrain::TankDrive(double left, double right) {
+  drive.TankDrive(left, right);
 }

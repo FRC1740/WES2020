@@ -30,7 +30,9 @@ class Drivetrain : public frc2::SubsystemBase {
    * @param rot the commanded rotation
    */
   void ArcadeDrive(double speed, double rot);
-
+  
+  void TankDrive(double left, double right);
+  
   void SetMaxOutput(double speed);
 
   double GetAverageEncoderDistance();
