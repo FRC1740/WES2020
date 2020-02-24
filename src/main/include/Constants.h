@@ -43,7 +43,7 @@ namespace ConClimber {
 namespace ConControlPanel {
     // Motor
     constexpr int MOTOR = 3;
-    constexpr double MOTOR_SPEED = 0.324; // FIXME: Guess & Check
+    constexpr double MOTOR_SPEED = 8100; // FIXME: 300 RPM x 27:1 Guess & Check
 }
 
 namespace ConDrivetrain {
