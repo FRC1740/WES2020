@@ -22,6 +22,7 @@
 #include "subsystems/Climber.h"
 #include "subsystems/Shooter.h"
 #include "subsystems/ControlPanel.h"
+#include "subsystems/Vision.h"
 
 
 /**
@@ -45,6 +46,7 @@ class RobotContainer {
   Climber climb;
   Shooter shoot;
   ControlPanel controlpanel;
+  Vision vision;
 
 
   // The autonomous routines
